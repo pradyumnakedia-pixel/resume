@@ -1,156 +1,940 @@
-<div align="center">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pradyumna Kedia — Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #05111F;
+  --bg2:     #081929;
+  --bg3:     #0C2038;
+  --card:    #0D1F33;
+  --card2:   #102440;
+  --cyan:    #00C8FF;
+  --cyan-d:  #0098CC;
+  --gold:    #F5C518;
+  --green:   #00DFA2;
+  --red:     #FF5C7A;
+  --text:    #D8EAF8;
+  --muted:   #5E84A8;
+  --dim:     #2A4560;
+  --border:  rgba(0,200,255,0.10);
+  --border2: rgba(0,200,255,0.18);
+  --font-display: 'Syne', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+  --font-body:    'Outfit', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--cyan); text-decoration: none; }
+a:hover { color: white; }
 
-# Pradyumna Kedia
+/* ── CANVAS BG ── */
+#grid-canvas {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+  opacity: 0.35;
+}
 
-[![CFA Charterholder](https://img.shields.io/badge/CFA-Charterholder-003087?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyTDIgN2wxMCA1IDEwLTV6TTIgMTdsOCA0IDgtNFY3bC04IDQtOC00eiIvPjwvc3ZnPg==&logoColor=white)](https://www.cfainstitute.org)
-[![ACCA Affiliate](https://img.shields.io/badge/ACCA-Affiliate%20%7C%20UAE%20Top-2E8B57?style=for-the-badge&logoColor=white)](https://www.accaglobal.com)
-[![FRM Part I](https://img.shields.io/badge/FRM-Part%20I%20Cleared-8B0000?style=for-the-badge&logoColor=white)](https://www.garp.org)
-[![Location](https://img.shields.io/badge/📍-Dubai%2C%20UAE-1B3A6B?style=for-the-badge)](https://www.google.com/maps/place/Dubai)
-[![Age](https://img.shields.io/badge/Age-20-2E6DB4?style=for-the-badge)](.)
+/* ── WRAPPER ── */
+.page { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 28px 80px; }
 
-<br/>
+/* ────────────────── HERO ────────────────── */
+.hero {
+  padding: 72px 0 56px;
+  border-bottom: 1px solid var(--border2);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+.hero-left {}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 32px; height: 1px;
+  background: var(--cyan);
+}
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6vw, 72px);
+  font-weight: 800;
+  color: white;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.hero-name span { color: var(--cyan); }
+.hero-tagline {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 520px;
+  margin-bottom: 36px;
+  border-left: 2px solid var(--cyan);
+  padding-left: 16px;
+}
+.hero-tagline strong { color: var(--cyan); font-weight: 500; }
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.contact-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text);
+  transition: all .2s;
+}
+.contact-chip:hover { border-color: var(--cyan); color: white; background: var(--bg3); }
+.contact-chip svg { width: 13px; height: 13px; stroke: var(--cyan); fill: none; stroke-width: 2; }
 
-> **One of the world's youngest CFA Charterholders** — all 3 levels cleared by age 19.  
-> All 16 CFA + ACCA papers passed on the **first attempt**.  
-> UAE's **2nd Top ACCA Affiliate** at Professional Level · MENA & UAE Prizewinner.
+/* Stats block */
+.stats-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  min-width: 260px;
+}
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 20px 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--cyan);
+  opacity: 0.6;
+}
+.stat-card:nth-child(2)::before { background: var(--gold); }
+.stat-card:nth-child(3)::before { background: var(--green); }
+.stat-card:nth-child(4)::before { background: #A78BFA; }
+.stat-card:hover { border-color: var(--border2); }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-num .accent { color: var(--cyan); }
+.stat-card:nth-child(2) .stat-num .accent { color: var(--gold); }
+.stat-card:nth-child(3) .stat-num .accent { color: var(--green); }
+.stat-card:nth-child(4) .stat-num .accent { color: #A78BFA; }
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
 
-<br/>
+/* ────────────────── TICKER ────────────────── */
+.ticker-wrap {
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  padding: 13px 0;
+  background: var(--bg2);
+  margin: 0 -28px;
+  position: relative;
+}
+.ticker-wrap::before, .ticker-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 2;
+}
+.ticker-wrap::before { left: 0; background: linear-gradient(to right, var(--bg2), transparent); }
+.ticker-wrap::after  { right: 0; background: linear-gradient(to left, var(--bg2), transparent); }
+.ticker-track {
+  display: flex;
+  gap: 0;
+  animation: ticker 28s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-item {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  padding: 0 24px;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ticker-item .dot {
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--cyan);
+  opacity: 0.5;
+}
+.ticker-item.gold .dot { background: var(--gold); }
+.ticker-item.green .dot { background: var(--green); }
+.ticker-item strong { color: var(--text); font-weight: 500; }
 
-[![Email](https://img.shields.io/badge/Email-pradyumna%40email.com-D44638?style=flat-square&logo=gmail&logoColor=white)](mailto:pradyumna@email.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-pradyumnakedia-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/pradyumnakedia)
-[![Resume PDF](https://img.shields.io/badge/Resume-Download%20PDF-1B3A6B?style=flat-square&logo=adobeacrobatreader&logoColor=white)](./assets/Pradyumna_Kedia_Resume.pdf)
+/* ────────────────── LAYOUT ────────────────── */
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  padding-top: 48px;
+}
+
+/* ────────────────── SIDEBAR ────────────────── */
+.sidebar {}
+.sidebar-section { margin-bottom: 36px; }
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Credential badges */
+.cred-list { display: flex; flex-direction: column; gap: 10px; }
+.cred-badge {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  transition: border-color .2s, background .2s;
+}
+.cred-badge:hover { border-color: var(--border2); background: var(--card2); }
+.cred-icon {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+.cred-icon.cfa  { background: rgba(0,200,255,0.12); color: var(--cyan); border: 1px solid rgba(0,200,255,0.25); }
+.cred-icon.acca { background: rgba(245,197,24,0.12); color: var(--gold); border: 1px solid rgba(245,197,24,0.25); }
+.cred-icon.frm  { background: rgba(0,223,162,0.12); color: var(--green); border: 1px solid rgba(0,223,162,0.25); }
+.cred-icon.other{ background: rgba(167,139,250,0.12); color: #A78BFA; border: 1px solid rgba(167,139,250,0.25); }
+.cred-name { font-weight: 600; font-size: 13px; color: white; line-height: 1.2; margin-bottom: 3px; }
+.cred-sub  { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+.cred-badge .badge-pill {
+  margin-top: 5px;
+  display: inline-block;
+  background: rgba(0,223,162,0.10);
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.08em;
+}
+
+/* Skills */
+.skill-group { margin-bottom: 20px; }
+.skill-group-name { font-size: 11px; color: var(--muted); font-family: var(--font-mono); margin-bottom: 10px; letter-spacing: 0.08em; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--card2);
+  border: 1px solid var(--dim);
+  color: var(--text);
+  letter-spacing: 0.03em;
+  transition: all .15s;
+}
+.skill-tag:hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* Languages */
+.lang-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.lang-row:last-child { border-bottom: none; }
+.lang-name { font-size: 13px; color: var(--text); }
+.lang-level {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 9px;
+  border-radius: 4px;
+}
+.lang-level.fluent  { background: rgba(0,223,162,0.1);  color: var(--green); }
+.lang-level.basic   { background: rgba(94,132,168,0.15); color: var(--muted); }
+
+/* ────────────────── MAIN ────────────────── */
+.main {}
+.main-section { margin-bottom: 52px; }
+.main-heading {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.main-heading::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--border2), transparent);
+}
+
+/* Timeline */
+.timeline { position: relative; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px; bottom: 8px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--cyan), var(--dim), transparent);
+}
+.job {
+  padding-left: 28px;
+  margin-bottom: 36px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.job.visible { opacity: 1; transform: translateY(0); }
+.job::before {
+  content: '';
+  position: absolute;
+  left: -4px; top: 10px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--cyan);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 8px rgba(0,200,255,0.5);
+}
+.job:not(:first-child)::before { background: var(--dim); box-shadow: none; border-color: var(--bg2); }
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+  gap: 12px;
+}
+.job-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: white; }
+.job-date {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--cyan);
+  background: rgba(0,200,255,0.08);
+  border: 1px solid rgba(0,200,255,0.2);
+  border-radius: 4px;
+  padding: 3px 9px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.job-date.past { color: var(--muted); background: rgba(94,132,168,0.08); border-color: var(--dim); }
+.job-company {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.job-company span { color: var(--gold); }
+.job-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.job-bullets li {
+  font-size: 13.5px;
+  color: #A8BED6;
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.6;
+}
+.job-bullets li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--dim);
+  font-size: 11px;
+  top: 2px;
+}
+.job-bullets li strong { color: white; font-weight: 500; }
+.job-bullets li em { color: var(--cyan); font-style: normal; font-family: var(--font-mono); font-size: 12px; }
+
+/* Education cards */
+.edu-grid { display: grid; gap: 12px; }
+.edu-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: start;
+  transition: border-color .2s, background .2s;
+}
+.edu-card:hover { border-color: var(--border2); background: var(--card2); }
+.edu-card.top {
+  border-color: rgba(0,200,255,0.2);
+  background: linear-gradient(135deg, var(--card2) 0%, rgba(0,200,255,0.04) 100%);
+}
+.edu-name { font-weight: 600; font-size: 14px; color: white; margin-bottom: 4px; }
+.edu-inst { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+.edu-detail { font-size: 12px; color: #6B8BAF; margin-top: 6px; }
+.prize-pill {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  background: rgba(245,197,24,0.10);
+  color: var(--gold);
+  border: 1px solid rgba(245,197,24,0.2);
+  white-space: nowrap;
+  text-align: right;
+}
+.edu-year {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* Leadership */
+.lead-list { display: flex; flex-direction: column; gap: 14px; }
+.lead-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color .2s;
+}
+.lead-item:hover { border-color: var(--border2); }
+.lead-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: rgba(0,200,255,0.08);
+  border: 1px solid rgba(0,200,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.lead-text { flex: 1; }
+.lead-title { font-weight: 600; font-size: 13.5px; color: white; margin-bottom: 4px; }
+.lead-desc  { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+.lead-desc strong { color: var(--text); font-weight: 500; }
+
+/* ────────────────── FOOTER ────────────────── */
+.footer {
+  margin-top: 60px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-name { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--muted); }
+.footer-mono { font-family: var(--font-mono); font-size: 10px; color: var(--dim); }
+
+/* ────────────────── ANIMATIONS ────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-left > * { animation: fadeUp .6s ease both; }
+.eyebrow       { animation-delay: .0s; }
+.hero-name     { animation-delay: .1s; }
+.hero-tagline  { animation-delay: .2s; }
+.contact-row   { animation-delay: .3s; }
+.stats-block   { animation: fadeUp .6s ease .2s both; }
+
+/* ────────────────── PRINT ────────────────── */
+@media print {
+  #grid-canvas { display: none; }
+  body { background: white; color: #111; font-size: 12px; }
+  :root {
+    --bg: white; --bg2: white; --bg3: #f5f5f5; --card: #f9f9f9;
+    --text: #111; --muted: #555; --dim: #999;
+    --cyan: #0066AA; --gold: #996600; --green: #006644;
+    --border: #ddd; --border2: #ccc; --card2: #f2f2f2;
+  }
+  .ticker-wrap { display: none; }
+  .hero { padding: 24px 0 20px; }
+  .hero-name { font-size: 36px; }
+  .job { opacity: 1; transform: none; }
+  .page { padding: 0 16px 20px; }
+}
+
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; }
+  .stats-block { grid-template-columns: 1fr 1fr; min-width: auto; }
+  .layout { grid-template-columns: 1fr; }
+  .hero-name { font-size: 40px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="grid-canvas"></canvas>
+
+<div class="page">
+
+  <!-- ═══ HERO ═══ -->
+  <header class="hero">
+    <div class="hero-left">
+      <div class="eyebrow">Finance · Audit · Technology</div>
+      <h1 class="hero-name">Pradyumna<br><span>Kedia</span></h1>
+      <p class="hero-tagline">
+        One of the world's youngest <strong>CFA Charterholders</strong> — all 3 levels cleared by age 19.<br>
+        All 16 CFA + ACCA papers on <strong>first attempt</strong>.<br>
+        UAE's <strong>2nd Top ACCA Affiliate</strong> · MENA & UAE Prizewinner.
+      </p>
+      <div class="contact-row">
+        <a href="mailto:pradyumna@email.com" class="contact-chip">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          pradyumna@email.com
+        </a>
+        <a href="https://linkedin.com/in/pradyumnakedia" class="contact-chip" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          pradyumnakedia
+        </a>
+        <a href="#" class="contact-chip">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Dubai, UAE · Age 20
+        </a>
+      </div>
+    </div>
+    <div class="stats-block">
+      <div class="stat-card">
+        <div class="stat-num"><span class="counter accent" data-target="60">0</span><span class="accent">+</span></div>
+        <div class="stat-label">Audit Clients</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num"><span class="counter accent" data-target="16">0</span><span class="accent">/16</span></div>
+        <div class="stat-label">Papers 1st Try</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num"><span class="counter accent" data-target="19">0</span></div>
+        <div class="stat-label">Age at CFA</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num"><span class="counter accent" data-target="25">0</span><span class="accent">%</span></div>
+        <div class="stat-label">Faster Turnaround</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ TICKER ═══ -->
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="ticker">
+      <div class="ticker-item"><span class="dot"></span> CFA Charterholder <strong>Age 19</strong></div>
+      <div class="ticker-item gold"><span class="dot gold"></span> MENA Prizewinner <strong>PM · FM · APM</strong></div>
+      <div class="ticker-item green"><span class="dot green"></span> <strong>60+</strong> Audit Clients</div>
+      <div class="ticker-item"><span class="dot"></span> ACCA All 13 Papers <strong>First Attempt</strong></div>
+      <div class="ticker-item gold"><span class="dot gold"></span> UAE 2nd Top <strong>ACCA Affiliate</strong></div>
+      <div class="ticker-item green"><span class="dot green"></span> FRM Part I <strong>Cleared</strong></div>
+      <div class="ticker-item"><span class="dot"></span> <strong>16/16</strong> Exams · Zero Resits</div>
+      <div class="ticker-item gold"><span class="dot gold"></span> DCF Models <strong>10+ Clients</strong></div>
+      <div class="ticker-item green"><span class="dot green"></span> AI Validation <strong>30%+ Accuracy Gain</strong></div>
+      <div class="ticker-item"><span class="dot"></span> Oxford Brookes <strong>BSc Applied Accounting</strong></div>
+      <!-- duplicate for seamless loop -->
+      <div class="ticker-item"><span class="dot"></span> CFA Charterholder <strong>Age 19</strong></div>
+      <div class="ticker-item gold"><span class="dot gold"></span> MENA Prizewinner <strong>PM · FM · APM</strong></div>
+      <div class="ticker-item green"><span class="dot green"></span> <strong>60+</strong> Audit Clients</div>
+      <div class="ticker-item"><span class="dot"></span> ACCA All 13 Papers <strong>First Attempt</strong></div>
+      <div class="ticker-item gold"><span class="dot gold"></span> UAE 2nd Top <strong>ACCA Affiliate</strong></div>
+      <div class="ticker-item green"><span class="dot green"></span> FRM Part I <strong>Cleared</strong></div>
+      <div class="ticker-item"><span class="dot"></span> <strong>16/16</strong> Exams · Zero Resits</div>
+      <div class="ticker-item gold"><span class="dot gold"></span> DCF Models <strong>10+ Clients</strong></div>
+      <div class="ticker-item green"><span class="dot green"></span> AI Validation <strong>30%+ Accuracy Gain</strong></div>
+      <div class="ticker-item"><span class="dot"></span> Oxford Brookes <strong>BSc Applied Accounting</strong></div>
+    </div>
+  </div>
+
+  <!-- ═══ BODY LAYOUT ═══ -->
+  <div class="layout">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+
+      <div class="sidebar-section">
+        <div class="section-label">Credentials</div>
+        <div class="cred-list">
+          <div class="cred-badge">
+            <div class="cred-icon cfa">CFA</div>
+            <div>
+              <div class="cred-name">CFA Charterholder</div>
+              <div class="cred-sub">CFA Institute, USA · 2022–2024</div>
+              <div class="badge-pill">All 3 levels · 1st attempt</div>
+            </div>
+          </div>
+          <div class="cred-badge">
+            <div class="cred-icon acca">ACCA</div>
+            <div>
+              <div class="cred-name">ACCA Affiliate</div>
+              <div class="cred-sub">ACCA, UK · 2021–2022</div>
+              <div class="badge-pill" style="background:rgba(245,197,24,0.10);color:var(--gold);">UAE 2nd Top · MENA Prizes</div>
+            </div>
+          </div>
+          <div class="cred-badge">
+            <div class="cred-icon frm">FRM</div>
+            <div>
+              <div class="cred-name">FRM Part I</div>
+              <div class="cred-sub">GARP Institute, USA · 2025</div>
+              <div class="badge-pill" style="background:rgba(0,223,162,0.10);color:var(--green);">1st attempt</div>
+            </div>
+          </div>
+          <div class="cred-badge">
+            <div class="cred-icon other">CFI</div>
+            <div>
+              <div class="cred-name">FMVA · BIDA · FinTech</div>
+              <div class="cred-sub">Corporate Finance Institute · 2024–25</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Technical Skills</div>
+        <div class="skill-group">
+          <div class="skill-group-name">Finance</div>
+          <div class="skill-tags">
+            <span class="skill-tag">DCF Modelling</span>
+            <span class="skill-tag">IFRS Audit</span>
+            <span class="skill-tag">Valuations</span>
+            <span class="skill-tag">Credit Assessment</span>
+            <span class="skill-tag">FRM Risk</span>
+            <span class="skill-tag">Statutory Audit</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-name">Technology</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Tableau</span>
+            <span class="skill-tag">Power Query</span>
+            <span class="skill-tag">SAP</span>
+            <span class="skill-tag">Prompt Eng.</span>
+            <span class="skill-tag">AI Validation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Languages</div>
+        <div class="lang-row"><span class="lang-name">English</span><span class="lang-level fluent">Fluent</span></div>
+        <div class="lang-row"><span class="lang-name">Hindi</span><span class="lang-level fluent">Fluent</span></div>
+        <div class="lang-row"><span class="lang-name">Arabic</span><span class="lang-level basic">Basic</span></div>
+        <div class="lang-row"><span class="lang-name">French</span><span class="lang-level basic">Basic</span></div>
+        <div class="lang-row"><span class="lang-name">Rajasthani</span><span class="lang-level basic">Basic</span></div>
+      </div>
+
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main class="main">
+
+      <!-- EXPERIENCE -->
+      <section class="main-section">
+        <h2 class="main-heading">Work Experience</h2>
+        <div class="timeline">
+
+          <div class="job">
+            <div class="job-header">
+              <div class="job-title">Senior Associate – Audit</div>
+              <div class="job-date">Jan 2025 – Present</div>
+            </div>
+            <div class="job-company">Mac &amp; Ross Chartered Accountants · <span>Dubai, UAE</span></div>
+            <ul class="job-bullets">
+              <li>Leading full-scope statutory audits for <strong>60+ clients</strong> (revenue AED 3M–100M) — walkthroughs, control testing, IFRS-based financial reviews — with <em>100% compliance</em> and zero post-filing corrections.</li>
+              <li>Firm's designated <strong>CFA resource for business valuations</strong>; built DCF and multiples-based models for 10+ clients, reducing project turnaround by <em>25%</em> and supporting partner in CFO-level discussions.</li>
+              <li>Managing and mentoring a team of <strong>4 Associates</strong> on audit methodology, IFRS documentation standards, sampling logic, and client query handling.</li>
+              <li>Coordinating cross-border consolidation testing and intercompany reconciliations across UAE and India.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-header">
+              <div class="job-title">Product Management Intern</div>
+              <div class="job-date past">Sep – Dec 2024</div>
+            </div>
+            <div class="job-company">FEXO AI · <span>Bangalore, India (Remote)</span></div>
+            <ul class="job-bullets">
+              <li>Structured validation workflows for AI-based <strong>Credit Assessment tools</strong> using real CAM formats; achieved <em>30%+</em> improvement in ratio mapping, risk scoring, and data structuring accuracy.</li>
+              <li>Co-developed prompt workflows with engineers to resolve IFRS classification issues and improve CAM extraction logic.</li>
+              <li>Acted as <strong>finance–product bridge</strong>: mapped KPIs into product workflows, tested analyst-focused UI — cutting review and demo cycles by <em>~50%</em>.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-header">
+              <div class="job-title">Finance &amp; Accounts Intern</div>
+              <div class="job-date past">Aug – Nov 2024</div>
+            </div>
+            <div class="job-company">Lavoya Restaurants LLC (Joe and the Juice) · <span>Dubai, UAE</span></div>
+            <ul class="job-bullets">
+              <li>Engaged directly with <strong>PwC auditors</strong> on financial audits across UAE, Qatar, and Saudi Arabia; supported group financial consolidation.</li>
+              <li>Supported <strong>SAP ERP migration</strong> — created and refined Master Data, coached accountants on the system, reducing manual data errors.</li>
+              <li>Prepared daily sales trend reports and monthly performance decks; handled end-to-end AP/AR accounting across a multinational team.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-header">
+              <div class="job-title">Management Trainee</div>
+              <div class="job-date past">May – Aug 2024</div>
+            </div>
+            <div class="job-company">Mac &amp; Ross Chartered Accountants · <span>Dubai, UAE</span></div>
+            <ul class="job-bullets">
+              <li>Built <strong>DCF valuation models</strong> using Prof. Aswath Damodaran's methodology for clients across the Middle East and India.</li>
+              <li>Collaborated with lead audit manager on draft audited financials; completed <em>15+ hours</em> of advanced financial modelling training.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section class="main-section">
+        <h2 class="main-heading">Education &amp; Qualifications</h2>
+        <div class="edu-grid">
+
+          <div class="edu-card top">
+            <div>
+              <div class="edu-name">CFA Charterholder</div>
+              <div class="edu-inst">CFA Institute, USA</div>
+              <div class="edu-detail">All 3 levels — first attempts · Charter received age 19</div>
+            </div>
+            <div style="text-align:right">
+              <div class="prize-pill">All First Attempts</div>
+              <div class="edu-year" style="margin-top:6px">2022–2024</div>
+            </div>
+          </div>
+
+          <div class="edu-card top">
+            <div>
+              <div class="edu-name">ACCA Affiliate</div>
+              <div class="edu-inst">ACCA, UK</div>
+              <div class="edu-detail">All 13 papers — first attempts · MENA Topper: PM, FM, APM · UAE Topper: PM, FM, APM, AA · 2nd Top Affiliate UAE (Professional Level)</div>
+            </div>
+            <div style="text-align:right">
+              <div class="prize-pill">UAE 2nd Top</div>
+              <div class="edu-year" style="margin-top:6px">2021–2022</div>
+            </div>
+          </div>
+
+          <div class="edu-card">
+            <div>
+              <div class="edu-name">Financial Risk Manager (FRM) — Part I</div>
+              <div class="edu-inst">GARP Institute, USA</div>
+            </div>
+            <div class="edu-year">2025</div>
+          </div>
+
+          <div class="edu-card">
+            <div>
+              <div class="edu-name">FMVA · BIDA · FinTech Professional</div>
+              <div class="edu-inst">Corporate Finance Institute, USA</div>
+            </div>
+            <div class="edu-year">2024–2025</div>
+          </div>
+
+          <div class="edu-card">
+            <div>
+              <div class="edu-name">Post-Graduate Programme (PGP Bharat)</div>
+              <div class="edu-inst">Masters Union</div>
+              <div class="edu-detail">Entrepreneurship, D2C commerce &amp; applied business strategy</div>
+            </div>
+            <div class="edu-year">2025–Present</div>
+          </div>
+
+          <div class="edu-card">
+            <div>
+              <div class="edu-name">B.Sc. Applied Accounting (Hons)</div>
+              <div class="edu-inst">Oxford Brookes University, UK</div>
+            </div>
+            <div class="edu-year">2022</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- LEADERSHIP -->
+      <section class="main-section">
+        <h2 class="main-heading">Leadership &amp; Activities</h2>
+        <div class="lead-list">
+
+          <div class="lead-item">
+            <div class="lead-icon">🏛️</div>
+            <div class="lead-text">
+              <div class="lead-title">Co-founder &amp; VP — Financial Literacy Club, JSS International Dubai</div>
+              <div class="lead-desc">Conducted workshops for <strong>600+ students</strong> on financial basics, fraud prevention, and financial awareness.</div>
+            </div>
+          </div>
+
+          <div class="lead-item">
+            <div class="lead-icon">🤝</div>
+            <div class="lead-text">
+              <div class="lead-title">Volunteer — ICAI Dubai &amp; Rajasthan Business &amp; Professional Group</div>
+              <div class="lead-desc">Supported events with <strong>1,000+ attendees</strong> including Kapil Dev, Harsha Bhogle, Boman Irani &amp; Guru Randhawa.</div>
+            </div>
+          </div>
+
+          <div class="lead-item">
+            <div class="lead-icon">🎓</div>
+            <div class="lead-text">
+              <div class="lead-title">ACCA &amp; CFA Mentor</div>
+              <div class="lead-desc">Ongoing peer mentoring on exam strategy, study planning, and career navigation for finance students across the region.</div>
+            </div>
+          </div>
+
+          <div class="lead-item">
+            <div class="lead-icon">🥋</div>
+            <div class="lead-text">
+              <div class="lead-title">Karate Black Belt Dan 2 · Competitive Cricket</div>
+              <div class="lead-desc">10+ years of karate training; <strong>2nd place</strong> in 100+ participant tournament. Multiple interschool T20 cricket wins.</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-name">Pradyumna Kedia</div>
+    <div class="footer-mono">Dubai, UAE · pradyumna@email.com · linkedin.com/in/pradyumnakedia</div>
+  </footer>
 
 </div>
 
----
+<script>
+// ── Grid canvas background ──
+(function() {
+  const c = document.getElementById('grid-canvas');
+  const ctx = c.getContext('2d');
+  function resize() { c.width = window.innerWidth; c.height = window.innerHeight; draw(); }
+  function draw() {
+    ctx.clearRect(0, 0, c.width, c.height);
+    const step = 48;
+    ctx.strokeStyle = 'rgba(0,200,255,0.07)';
+    ctx.lineWidth = 0.5;
+    for (let x = 0; x < c.width; x += step) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, c.height); ctx.stroke();
+    }
+    for (let y = 0; y < c.height; y += step) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(c.width, y); ctx.stroke();
+    }
+    // Dot at each intersection
+    ctx.fillStyle = 'rgba(0,200,255,0.14)';
+    for (let x = 0; x < c.width; x += step) {
+      for (let y = 0; y < c.height; y += step) {
+        ctx.beginPath(); ctx.arc(x, y, 1, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+  }
+  window.addEventListener('resize', resize);
+  resize();
+})();
 
-## 🧭 About
+// ── Counter animation ──
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const duration = 1400;
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target);
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const counters = document.querySelectorAll('.counter');
+const statsObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { animateCounter(e.target); statsObs.unobserve(e.target); }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => statsObs.observe(c));
 
-Finance professional with **1.5+ years of experience** across statutory audit, IFRS financial reporting, DCF-based business valuations, and AI product validation — all based in Dubai.
-
-Currently leading audits for **60+ clients** at a mid-tier CA firm while managing a team of 4 Associates. My edge is rare: I hold both the CFA charter and ACCA affiliate status, with all credentials cleared first-attempt and the CFA charter completed at age 19.
-
-I sit at the intersection of **deep technical finance** and **applied technology** — equally comfortable in an audit room, building a DCF model, or validating AI-based credit tools.
-
----
-
-## 💼 Work Experience
-
-### 🏢 Senior Associate – Audit · *Mac & Ross Chartered Accountants, Dubai*
-**Jan 2025 – Present**
-
-- Leading full-scope statutory audits for **60+ clients** (revenue AED 3M–100M) — walkthroughs, control testing, IFRS-based financial reviews — with **100% compliance and zero post-filing corrections**
-- Firm's designated **CFA resource for business valuations**; built DCF and multiples-based models for 10+ clients, reducing project turnaround by **25%** and supporting partner in CFO-level discussions
-- Managing and mentoring **4 Associates** on audit methodology, IFRS documentation standards, sampling logic, and client query handling
-- Coordinating cross-border consolidation testing and intercompany reconciliations across UAE and India
-
----
-
-### 🤖 Product Management Intern · *FEXO AI, Bangalore (Remote)*
-**Sep – Dec 2024**
-
-- Structured validation workflows for AI-based **Credit Assessment tools** using real CAM formats; achieved **30%+ improvement** in ratio mapping, risk scoring, and data structuring accuracy
-- Co-developed prompt workflows with engineers to resolve **IFRS classification issues** and improve CAM extraction logic
-- Served as the **finance–product bridge**: mapped KPIs into product workflows and tested analyst-focused UI — cutting review and demo cycles by **~50%**
-
----
-
-### 📊 Finance & Accounts Intern · *Lavoya Restaurants LLC (Joe and the Juice), Dubai*
-**Aug – Nov 2024**
-
-- Engaged directly with **PwC auditors** on financial audits across UAE, Qatar, and Saudi Arabia; supported consolidation of group financials
-- Supported **SAP ERP migration** — created and refined Master Data, coached accountants on the system, reducing manual data errors
-- Prepared daily sales trend reports and monthly performance decks; handled end-to-end AP/AR accounting
-
----
-
-### 🎓 Management Trainee · *Mac & Ross Chartered Accountants, Dubai*
-**May – Aug 2024**
-
-- Built **DCF valuation models** using Prof. Aswath Damodaran's methodology for clients across the Middle East and India
-- Completed 15+ hours of advanced financial modelling training; collaborated on draft audited financials
-
----
-
-## 🏆 Qualifications & Education
-
-| Credential | Institution | Detail | Year |
-|---|---|---|---|
-| 🥇 **CFA Charterholder** | CFA Institute, USA | All 3 levels — **first attempts** | 2022–2024 |
-| 🥇 **FRM Part I** | GARP Institute, USA | Cleared **first attempt** | 2025 |
-| 🥇 **ACCA Affiliate** | ACCA, UK | All 13 papers — **first attempts** · MENA Topper: PM, FM, APM · UAE Topper: PM, FM, APM, AA · **2nd Top Affiliate in UAE** (Professional Level) | 2021–2022 |
-| 📜 FMVA · BIDA · FinTech | Corporate Finance Institute | Financial modelling & BI certifications | 2024–2025 |
-| 🎓 PGP Bharat | Masters Union | Entrepreneurship, D2C commerce & applied business strategy | 2025–Present |
-| 🎓 B.Sc. Applied Accounting (Hons) | Oxford Brookes University, UK | — | 2022 |
-| 🎓 Senior Secondary – ISC | JSS International School, Dubai | — | 2024 |
-
----
-
-## 🛠 Skills
-
-### Finance & Accounting
-![Financial Modelling](https://img.shields.io/badge/Financial%20Modelling-DCF%20%7C%20Multiples-1B3A6B?style=flat-square)
-![IFRS](https://img.shields.io/badge/IFRS-Audit%20%26%20Reporting-2E6DB4?style=flat-square)
-![Statutory Audit](https://img.shields.io/badge/Statutory%20Audit-60%2B%20Clients-2E6DB4?style=flat-square)
-![Credit Assessment](https://img.shields.io/badge/Credit%20Assessment-CAM%20%7C%20Risk%20Scoring-2E6DB4?style=flat-square)
-![FRM](https://img.shields.io/badge/FRM-Risk%20Frameworks-8B0000?style=flat-square)
-![Valuations](https://img.shields.io/badge/Valuations-Damodaran%20Methodology-1B3A6B?style=flat-square)
-
-### Technology
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=postgresql&logoColor=white)
-![Power Query](https://img.shields.io/badge/Power%20Query-217346?style=flat-square&logo=microsoftexcel&logoColor=white)
-![Tableau](https://img.shields.io/badge/Tableau-E97627?style=flat-square&logo=tableau&logoColor=white)
-![SAP](https://img.shields.io/badge/SAP-0FAAFF?style=flat-square&logo=sap&logoColor=white)
-![Prompt Engineering](https://img.shields.io/badge/Prompt%20Engineering-AI%20Validation-6B21A8?style=flat-square)
-
-### Languages
-![English](https://img.shields.io/badge/English-Fluent-2E8B57?style=flat-square)
-![Hindi](https://img.shields.io/badge/Hindi-Fluent-2E8B57?style=flat-square)
-![Arabic](https://img.shields.io/badge/Arabic-Basic-gray?style=flat-square)
-![French](https://img.shields.io/badge/French-Basic-gray?style=flat-square)
-
----
-
-## 🌟 Achievements & Leadership
-
-```
-🏅  UAE's 2nd Top ACCA Affiliate — Professional Level
-🏅  MENA Prizewinner — Performance Management, Financial Management, Advanced PM
-🏅  UAE Prizewinner — PM, FM, APM, Audit & Assurance
-🎓  CFA Charterholder at age 19 — all levels, first attempts
-🥋  Karate Black Belt Dan 2 — 2nd place, 100+ participant tournament
-🏏  Competitive cricket — multiple interschool T20 wins
-```
-
-**Co-founder & VP** — Financial Literacy Club, JSS International Dubai  
-→ Conducted workshops for **600+ students** on financial basics, fraud prevention & awareness
-
-**Volunteer** — ICAI Dubai & Rajasthan Business & Professional Group  
-→ Supported events with **1,000+ attendees** including Kapil Dev, Harsha Bhogle, Boman Irani & Guru Randhawa
-
-**ACCA & CFA Mentor** — Ongoing peer mentoring on exam strategy, study planning & career navigation
-
----
-
-## 📂 Repository Structure
-
-```
-pradyumna-kedia/
-├── README.md                          ← You are here
-├── assets/
-│   └── Pradyumna_Kedia_Resume.pdf    ← Download full resume
-└── credentials/
-    ├── CFA_Summary.md                 ← CFA journey & approach
-    ├── ACCA_Summary.md                ← ACCA prizes & results
-    └── FRM_Summary.md                 ← FRM Part I details
-```
-
----
-
-<div align="center">
-
-*Open to roles in audit, financial analysis, valuations, and finance-adjacent product/tech.*  
-**Let's connect → [linkedin.com/in/pradyumnakedia](https://linkedin.com/in/pradyumnakedia)**
-
-</div>
+// ── Scroll reveal for jobs ──
+const jobs = document.querySelectorAll('.job');
+const jobObs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      jobObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+jobs.forEach(j => jobObs.observe(j));
+</script>
+</body>
+</html>
